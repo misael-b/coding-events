@@ -14,11 +14,36 @@
             <th>
                 Name:
             </th>
+
+            <th>
+                Description:
+            </th>
+
+            <th>
+                Address:
+            </th>
+            <th>
+                Photo:
+            </th>
         </tr>
+
     </thead>
     <tr th:each="event : ${events}">
-        <td th:text="${event}"></td>
+        <td th:text="${event.getKey()}"></td>
+        <td th:text="${event.getValue()}"></td>
+        <td th:replace="fragments :: address"></td>
+        <td><img th:src="@{/images/Code With Pride.jpg}" width="110px"/></td>
     </tr>
+
+
+
+    </th:block>
+
+
+<!--    <tr>-->
+<!--       -->
+<!--    </tr>-->
+
 </table>
 
 </body>
