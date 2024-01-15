@@ -28,12 +28,17 @@
         </tr>
 
     </thead>
-    <tr th:each="event : ${events}">
-        <td th:text="${event.getKey()}"></td>
-        <td th:text="${event.getValue()}"></td>
-        <td th:replace="fragments :: address"></td>
-        <td><img th:src="@{/images/Code With Pride.jpg}" width="110px"/></td>
-    </tr>
+    <th:block th:each="event : ${events}">
+        <tr >
+            <td th:text="${event.getKey()}"></td>
+            <td th:text="${event.getValue()}"></td>
+            <td th:replace="fragments :: address"></td>
+            <td><img th:src='@{${"/images/" + event.getKey() +".jpg"}}' width="110px"/></td>
+        </tr>
+<!--        <th:block th:each="photo: ${photos}">-->
+<!--            <td><img th:src="@{${photo}}" width="110px"/></td>-->
+<!--        </th:block>-->
+    </th:block>
 
 
 

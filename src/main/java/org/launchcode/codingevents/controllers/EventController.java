@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("/events")
 public class EventController {
     private static HashMap<String,String> events = new HashMap<>();
+    private static ArrayList<String> photos = new ArrayList<>();
 
     @GetMapping
     public String displayAllEvents(Model model){
@@ -22,6 +23,11 @@ public class EventController {
         events.put("Code With Pride","A fun meetup sponsored by LaunchCode");
         events.put("Javascripty", "An imaginary meetup for Javascript developers");
         model.addAttribute("events", events);
+
+        photos.add("/images/Code With Pride.jpg");
+        photos.add("/images/Javascripty.jpg");
+        photos.add("/images/Menteaship.jpg");
+        model.addAttribute("photos", photos);
         return "events/index";
     }
 
