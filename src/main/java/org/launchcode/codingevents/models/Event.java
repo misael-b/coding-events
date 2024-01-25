@@ -18,15 +18,18 @@ public class Event {
     private int id;
     private static int nextID = 1;
 
-    public Event(String name, String description, String contactEmail) {
+    private EventType type;
+
+    public Event(String name, String description, String contactEmail, EventType type) {
+        this();
         this.name = name;
         this.description = description;
-        this.id = nextID;
         this.contactEmail=contactEmail;
-        nextID++;
+        this.type = type;
     }
     public Event(){
-
+        this.id = nextID;
+        nextID++;
     }
 
     public String getName() {
@@ -56,6 +59,14 @@ public class Event {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
     }
 
     @Override
