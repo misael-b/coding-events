@@ -36,6 +36,7 @@ public class EventController {
     @PostMapping("create")
     public String createEvent(@ModelAttribute @Valid Event newEvent, Errors errors, Model model){
         if (errors.hasErrors()){
+            model.addAttribute("types",EventType.values());
             return "events/create";
         }
         eventRepository.save(newEvent);
@@ -72,15 +73,21 @@ public class EventController {
     }
 
     @PostMapping("edit")
-    public String processEditForm(int eventId, String name, String description, String contactEmail, EventType type) {
+    public String processEditForm(int eventId, @ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
 //        Event event = EventData.getByID(eventId);
 //        event.setName(name);
 //        event.setDescription(description);
+        if (errors.hasErrors()){
+            model.addAttribute("types",EventType.values());
+            //model.addAttribute("event", eventRepository.findById(eventId).get());
+            model.addAttribute("eventId", eventId);
+            return "events/edit";
+        }
         Event event = eventRepository.findById(eventId).get();
-        event.setContactEmail(contactEmail);
-        event.setName(name);
-        event.setDescription(description);
-        event.setType(type);
+        event.setContactEmail(newEvent.getContactEmail());
+        event.setName(newEvent.getName());
+        event.setDescription(newEvent.getDescription());
+        event.setType(newEvent.getType());
         eventRepository.save(event);
 
         return "redirect:/events";
