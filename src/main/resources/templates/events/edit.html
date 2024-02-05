@@ -9,13 +9,30 @@
 <form method="post" th:action="@{/events/edit}">
     <div class="form-group">
         <label> New Name
-            <input type="text" name="name" class="form-control">
+            <input type="text" name="name" th:value="${event.name}" class="form-control">
         </label>
     </div>
 
     <div class="form-group">
         <label >New Description
-            <input type="text" name="description" class="form-control">
+            <input type="text" name="description" th:value="${event.description}" class="form-control">
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label>New Contact Email
+            <input name ="contactEmail" th:value="${event.contactEmail}" class="form-control">
+        </label>
+<!--        <p class="error" th:errors="${event.contactEmail}"></p>-->
+    </div>
+
+    <div class="form-group">
+        <label>New Type
+            <select name="type">
+                <option th:each="type : ${types}" th:value="${type}" th:text="${type.displayName}">
+
+                </option>
+            </select>
         </label>
     </div>
 

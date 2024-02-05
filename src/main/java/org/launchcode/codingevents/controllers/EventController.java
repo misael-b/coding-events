@@ -66,15 +66,22 @@ public class EventController {
     public String displayEditForm(Model model, @PathVariable int eventId) {
         // controller code will go here
         //Event event = EventData.getByID(eventId);
-        model.addAttribute("event", eventRepository.findById(eventId));
+        model.addAttribute("event", eventRepository.findById(eventId).get());
+        model.addAttribute("types",EventType.values());
         return "events/edit";
     }
 
     @PostMapping("edit")
-    public String processEditForm(int eventId, String name, String description) {
+    public String processEditForm(int eventId, String name, String description, String contactEmail, EventType type) {
 //        Event event = EventData.getByID(eventId);
 //        event.setName(name);
 //        event.setDescription(description);
+        Event event = eventRepository.findById(eventId).get();
+        event.setContactEmail(contactEmail);
+        event.setName(name);
+        event.setDescription(description);
+        event.setType(type);
+        eventRepository.save(event);
 
         return "redirect:/events";
     }
